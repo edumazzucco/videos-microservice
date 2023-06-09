@@ -1,7 +1,7 @@
 //TDD - Kent Beck
 // Tests: Fail -> Success -> Refactor
 
-import {v4 as uuidv4} from 'uuid';
+import UniqueEntityId from '../../../@seedwork/domain/unique-entity-id.vo';
 
 export type CategoryProps = {
     name: string;
@@ -11,9 +11,9 @@ export type CategoryProps = {
 }
 
 export class Category {
-    public readonly id: string;
-    constructor(public readonly props: CategoryProps, id?: string) {
-        this.id = id || uuidv4();
+    public readonly id: UniqueEntityId;
+    constructor(public readonly props: CategoryProps, id?: UniqueEntityId) {
+        this.id = id || new UniqueEntityId();
         this.props.name = this.props.name ?? null;
         this.props.description = this.props.description ?? null;
         this.props.is_active = this.props.is_active ?? true;

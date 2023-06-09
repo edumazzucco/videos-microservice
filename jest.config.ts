@@ -75,6 +75,8 @@ export default {
   //   "node_modules"
   // ],
 
+  // moduleDirectories: ['node_modules', '<rootDir>'],
+
   // An array of file extensions your modules use
   // moduleFileExtensions: [
   //   "js",

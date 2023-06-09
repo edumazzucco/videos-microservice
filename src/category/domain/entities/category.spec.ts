@@ -1,6 +1,6 @@
+import UniqueEntityId from "../../../@seedwork/domain/unique-entity-id.vo";
 import { Category } from "./category";
 import { omit } from 'lodash';
-import { validate as uuidValidate } from "uuid";
 
 describe("Category Tests", () => {
   describe("constructor of category", () => {
@@ -34,33 +34,34 @@ describe("Category Tests", () => {
         let category = new Category({name: "Movie"})
         expect(category.id).toBeDefined();
         expect(category.id).not.toBeNull();
-        expect(uuidValidate(category.id)).toBeTruthy();
+        expect(category.id).toBeInstanceOf(UniqueEntityId)
         expect(category.id).toBe(category.id);
 
-        category = new Category({name: "Movie"}, '123')
+        category = new Category({name: "Movie"}, '123' as any)
         expect(category.id).toBe("123");
         expect(category.id).toBeDefined();
         expect(category.id).not.toBeNull();
-        expect(uuidValidate(category.id)).toBeFalsy();
+        expect(category.id).toBeTruthy();
         expect(category.id).toBe(category.id);
 
-        category = new Category({name: "Movie"}, 'c2a0de9a-919c-4fe1-9766-edd839cfde74')
+        category = new Category({name: "Movie"}, 'c2a0de9a-919c-4fe1-9766-edd839cfde74' as any)
         expect(category.id).toBe("c2a0de9a-919c-4fe1-9766-edd839cfde74");
         expect(category.id).toBeDefined();
         expect(category.id).not.toBeNull();
-        expect(uuidValidate(category.id)).toBeTruthy();
+        expect(category.id).toBeTruthy();
         expect(category.id).toBe(category.id);
 
         category = new Category({name: "Movie"}, null)
         expect(category.id).toBeDefined();
+        expect(category.id).toBeDefined();
         expect(category.id).not.toBeNull();
-        expect(uuidValidate(category.id)).toBeTruthy();
+        expect(category.id).toBeTruthy();
         expect(category.id).toBe(category.id);
 
         category = new Category({name: "Movie"}, undefined)
         expect(category.id).toBeDefined();
         expect(category.id).not.toBeNull();
-        expect(uuidValidate(category.id)).toBeTruthy();
+        expect(category.id).toBeTruthy();
         expect(category.id).toBe(category.id);
       });
 
