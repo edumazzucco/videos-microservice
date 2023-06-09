@@ -1,6 +1,8 @@
 //TDD - Kent Beck
 // Tests: Fail -> Success -> Refactor
 
+import {v4 as uuidv4} from 'uuid';
+
 export type CategoryProps = {
     name: string;
     description?: string;
@@ -9,7 +11,14 @@ export type CategoryProps = {
 }
 
 export class Category {
-    constructor(public readonly props: CategoryProps) {}
+    public readonly id: string;
+    constructor(public readonly props: CategoryProps, id?: string) {
+        this.id = id || uuidv4();
+        this.props.name = this.props.name ?? null;
+        this.props.description = this.props.description ?? null;
+        this.props.is_active = this.props.is_active ?? true;
+        this.props.created_at = this.props.created_at ?? new Date();
+    }
 
     get name() {
         return this.props.name
@@ -19,14 +28,21 @@ export class Category {
         return this.props.description
     }
 
+   private set description(value: string) {
+        this.props.description = value ?? null
+    }
+
     get is_active() {
         return this.props.is_active
     }
 
+    private set is_active(value: boolean) {
+        this.props.is_active = value ?? true
+    }
+
     get created_at() {
         return this.props.created_at
-    }
+}
 }
 
-// const category = new Category({name: 'Movie'})
-
+    // const category = new Category({name: 'Movie'})
