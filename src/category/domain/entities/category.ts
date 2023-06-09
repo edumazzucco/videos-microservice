@@ -28,5 +28,5 @@ export class Category {
     }
 }
 
-const category = new Category({name: 'Movie'})
+// const category = new Category({name: 'Movie'})
 
